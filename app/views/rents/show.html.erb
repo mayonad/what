@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rent.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @rent.description %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= image_tag @rent.photo.url(:small) %>
+</p>
+
+<p>
+  <strong>Guests:</strong>
+  <%= @rent.guests %>
+</p>
+
+<p>
+  <strong>Bedroom:</strong>
+  <%= @rent.bedroom %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @rent.price %>
+</p>
+
+<p>
+  <strong>Wifi:</strong>
+  <%= @rent.wifi %>
+</p>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@rent.latitude}%2C#{@rent.longitude}" %>
+
+<h3>Nearby locations</h3>
+<ul>
+<% for rents in @rent.nearbys(10) %>
+  <li><%= link_to rents.location, rents %> (<%= rents.distance.round(2) %> miles)</li>
+<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_rent_path(@rent) %> |
+<%= link_to 'Back', rents_path %>
